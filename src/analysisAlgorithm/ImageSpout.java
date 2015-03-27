@@ -9,72 +9,43 @@
  * > how to do that in OS Window?
  * 혹은 동영상을 다운받을 수 있는 툴(웹사이트)를 이용하여 영상데이터를 수집
  * 
+ * update 150327 Fri
+ * imageCollector에서 영상에서 이미지를 추출하는 과정을 수행
+ * 추출한 이미지를 특정경로 폴더에 저장하고 해당 폴더에 있는 이미지들을 읽어와서 emit
+ * 
  * 
  */
 
 package analysisAlgorithm;
 
 import java.util.Map;
+import java.util.Random;
 
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
-import backtype.storm.topology.IRichSpout;
 import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.topology.base.BaseRichSpout;
+import backtype.storm.utils.Utils;
 
-public class ImageSpout implements IRichSpout {
-
+public class ImageSpout extends BaseRichSpout {
+	SpoutOutputCollector _collector;
+	Random _rand;
+	
 	@Override
-	public void ack(Object arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void activate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void close() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deactivate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void fail(Object arg0) {
-		// TODO Auto-generated method stub
-		
+	public void open(Map arg0, TopologyContext arg1, SpoutOutputCollector arg2) {
+		_collector = arg2;
+		_rand = new Random();
 	}
 
 	@Override
 	public void nextTuple() {
-		// TODO Auto-generated method stub
-		
+		Utils.sleep(100);
 	}
 
-	@Override
-	public void open(Map arg0, TopologyContext arg1, SpoutOutputCollector arg2) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer arg0) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public Map<String, Object> getComponentConfiguration() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
