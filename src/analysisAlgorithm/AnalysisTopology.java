@@ -16,19 +16,19 @@ public class AnalysisTopology { // Topology that analysis image and recognize a
 
 		// attach a spout to emit images from video.
 		tBuilder.setSpout("image-Spout", new ImageSpout(), 1);
-
+/*
 		// attach a bolt to recognize a 'Thing' from video.
-		tBuilder.setBolt("recog-Bolt", new RecogBolt(), 10).shuffleGrouping(
+		tBuilder.setBolt("recog-Bolt", new RecogBolt(), 1).shuffleGrouping(
 				"image-Spout");
 
 		// attach a bolt to count a 'Thing' from stream.
-		tBuilder.setBolt("count-Bolt", new CountBolt(), 15).fieldsGrouping(
+		tBuilder.setBolt("count-Bolt", new CountBolt(), 1).fieldsGrouping(
 				"recog-Bolt", new Fields("iName"));
 
 		// attach a bolt to report a result. using globalGrouping
 		tBuilder.setBolt("report-Bolt", new ReportBolt(), 1).globalGrouping(
 				"count-Bolt");
-
+*/
 		Config conf = new Config();
 
 		conf.setDebug(true);
@@ -38,7 +38,7 @@ public class AnalysisTopology { // Topology that analysis image and recognize a
 			StormSubmitter.submitTopology(args[0], conf,
 					tBuilder.createTopology());
 		} else {											// on Local cluster
-			conf.setMaxTaskParallelism(3);
+			conf.setMaxTaskParallelism(1);
 			LocalCluster cluster = new LocalCluster();
 			cluster.submitTopology("analysis-image", conf,
 					tBuilder.createTopology());
