@@ -49,5 +49,6 @@
 	<classpathentry kind="lib" path="C:/apache-storm-0.9.3/lib/tools.logging-0.2.3.jar"/>
 	<classpathentry kind="lib" path="C:/apache-storm-0.9.3/lib/tools.macro-0.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/opencv-2.4.10/opencv/build/java/opencv-2410.jar"/>
+	<classpathentry kind="lib" path="C:/ImShow-Java-OpenCV-master/ImShow-Java-OpenCV-master/Imshow.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
