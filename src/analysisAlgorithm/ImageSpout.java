@@ -28,6 +28,7 @@ import java.util.Random;
 import org.opencv.core.Core;
 import org.opencv.highgui.VideoCapture;
 
+import backtype.storm.Config;
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
@@ -52,19 +53,32 @@ public class ImageSpout extends BaseRichSpout {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		vc = new VideoCapture();
 	}
+	
+	 @Override
+	    public Map<String, Object> getComponentConfiguration()
+	    {
+	      // create the component config
+	      Config ret = new Config();
+
+	      // set the parallelism for this spout to be 1
+	      ret.setMaxTaskParallelism(1);
+
+	      return ret;
+	    }
+
 
 	@Override
 	public void nextTuple() {
-		Utils.sleep(1000);
 		// read video at the folder that stores video and emit video.
-		checkOpenVideo = vc.open("test_0.avi");
+		checkOpenVideo = vc.open("test_1.avi");
 		System.out.println(checkOpenVideo);
 		_collector.emit(new Values(vc));
+		Utils.sleep(30000);
 	}
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer arg0) {
 		// TODO Auto-generated method stub
-		arg0.declare(new Fields("video_name"));
+		arg0.declare(new Fields("video"));
 	}
 }
